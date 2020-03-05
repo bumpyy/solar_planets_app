@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_parallax/flutter_parallax.dart';
 import 'package:transformer_page_view/parallax.dart';
 import 'package:align_positioned/align_positioned.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class PlanetScreen extends StatefulWidget {
   final String planetImage;
@@ -24,7 +25,25 @@ class _PlanetScreenState extends State<PlanetScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle style = Theme.of(context).textTheme.title.copyWith(
+          fontSize: 50,
+          fontWeight: FontWeight.normal,
+        );
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(top: 150),
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.chevron_left,
+            color: Colors.black,
+          ),
+          backgroundColor: Color.fromRGBO(255, 255, 255, 0.3),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       backgroundColor: Colors.black,
       body: ListView(
         children: <Widget>[
@@ -37,10 +56,11 @@ class _PlanetScreenState extends State<PlanetScreen> {
                 Parallax.inside(
                   child: Center(
                     child: Hero(
-                      child: Text(
+                      child: AutoSizeText(
                         widget.planetName,
+                        maxLines: 1,
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height * .15),
+                            fontSize: MediaQuery.of(context).size.height * .17),
                       ),
                       tag: 'planetName',
                     ),
@@ -53,7 +73,7 @@ class _PlanetScreenState extends State<PlanetScreen> {
                     tag: 'planetImage',
                     child: Image.asset(
                       widget.planetImage,
-                      width: MediaQuery.of(context).size.width * .8,
+                      width: MediaQuery.of(context).size.width * .9,
                     ),
                   ),
                 ),

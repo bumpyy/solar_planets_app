@@ -34,6 +34,7 @@ dev_dependencies:
   align_positioned: ^1.2.5
   flutter_parallax: ^0.1.2
   parallax_image: ^0.3.1+1
+  auto_size_text: ^2.1.0
 
 
 

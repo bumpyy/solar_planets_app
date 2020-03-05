@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import './UI/home.dart';
+import 'package:flutter/services.dart';
+import './UI/solar_planets.dart';
 import 'package:flutter/cupertino.dart';
 
 void main() => runApp(new MyApp());
@@ -11,6 +12,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
 //    ScreenUtil.init(context);
 //    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return new MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData.light().copyWith(
