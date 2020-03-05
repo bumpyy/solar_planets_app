@@ -13,25 +13,78 @@ class SolarPlanets extends StatefulWidget {
   _SolarPlanetsState createState() => _SolarPlanetsState();
 }
 
-List<String> images = [
-  "assets/images/earth-render-small.webp",
-  "assets/images/jupiter-render-small.webp",
-  "assets/images/mars-render-small.webp"
-];
+Map<String, String> images = {
+  "BUMI": 'assets/images/earth-render-small.webp',
+  "JUPITER": 'assets/images/jupiter-render-small.webp',
+  "MARS": 'assets/images/mars-render-small.webp',
+  "MERKURIUS": 'assets/images/mercury-render-small.webp',
+  "BULAN": 'assets/images/moon-render-small.webp',
+  "NEPTUNUS": 'assets/images/neptune-render-small.webp',
+  "PLUTO": 'assets/images/pluto-render-small.webp',
+  "SATURNUS": 'assets/images/saturn-render-small.webp',
+  "URANUS": 'assets/images/uranus-render-small.webp',
+  "VENUS": 'assets/images/venus-render-small.webp',
+};
 
-List<String> text0 = ["BUMI", "Jupiter", "Mars"];
-List<Map<String, String>> textMap = [
-  {"BUMI": "Planet Biru"},
-  {
-    "Jupiter": "entah apa",
-  },
-  {"Mars": "planet Merah"},
+//List<String> text0 = ["BUMI", "Jupiter", "Mars"];
+List<String> planetsName = [
+  "MERKURIUS",
+  "VENUS",
+  "BUMI",
+  "BULAN",
+  "MARS",
+  "JUPITER",
+  "NEPTUNUS",
+  "SATURNUS",
+  "URANUS",
+  "PLUTO",
 ];
-List<String> text1 = [
-  "Planet Biru",
-  "Entah, ntar lah cari tahu",
-  "Planet merah"
-];
+//
+//List<String> planetsNick = [
+//  "assets/images/earth-render-small.webp",
+//  "assets/images/jupiter-render-small.webp",
+//  "assets/images/mars-render-small.webp",
+//  "assets/images/mercury-render-small.webp",
+//  "assets/images/moon-render-small.webp",
+//  "assets/images/neptune-render-small.webp",
+//  "assets/images/pluto-render-small.webp",
+//  "assets/images/saturn-render-small.webp",
+//  "assets/images/uranus-render-small.webp",
+//  "assets/images/venus-render-small.webp",
+//];
+
+Map<String, String> planetsNick = {
+  "BUMI": 'Blue Planet',
+  "JUPITER": 'Giant Planet',
+  "MARS": 'Red Planet',
+  "MERKURIUS": 'Swift Planet',
+  "BULAN": '',
+  "NEPTUNUS": 'Big Blue Planet',
+  "PLUTO": 'The forgoten',
+  "SATURNUS": 'Ringed Planet',
+  "URANUS": 'Ice Giant',
+  "VENUS": 'Morning star',
+};
+
+//List<String> text1 = [
+//  "Planet Biru",
+//  "Entah, ntar lah cari tahu",
+//  "Planet merah"
+//];
+
+Widget _flightShuttleBuilder(
+  BuildContext flightContext,
+  Animation<double> animation,
+  HeroFlightDirection flightDirection,
+  BuildContext fromHeroContext,
+  BuildContext toHeroContext,
+) {
+  return DefaultTextStyle(
+    softWrap: false,
+    style: DefaultTextStyle.of(toHeroContext).style,
+    child: toHeroContext.widget,
+  );
+}
 
 class PlanetsCarousell extends StatelessWidget {
   @override
@@ -60,12 +113,18 @@ class PlanetsCarousell extends StatelessWidget {
                       position: info.position,
                       translationFactor: 300.0,
                     ),
+                    //
                     //planet name
                     ParallaxContainer(
-                      child: Text(
-                        text0[info.index],
-                        style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height * .13),
+                      child: Hero(
+                        flightShuttleBuilder: _flightShuttleBuilder,
+                        child: Text(
+                          planetsName[info.index],
+                          style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.height * .13),
+                        ),
+                        tag: 'planetName',
                       ),
                       position: info.position,
                       translationFactor: 300.0,
@@ -73,7 +132,7 @@ class PlanetsCarousell extends StatelessWidget {
                     //planet nickname
                     ParallaxContainer(
                       child: Text(
-                        text1[info.index],
+                        planetsNick[planetsName[info.index]],
                         style: TextStyle(
                           fontSize: MediaQuery.of(context).size.height * .03,
                           color: Colors.grey,
@@ -95,10 +154,10 @@ class PlanetsCarousell extends StatelessWidget {
                     child: GestureDetector(
                       child: Hero(
                         child: Image.asset(
-                          images[info.index],
+                          images[planetsName[info.index]],
                           width: MediaQuery.of(context).size.height * .8,
                         ),
-                        tag: 'planet',
+                        tag: 'planetImage',
                       ),
                       onTap: () {
                         Navigator.push(
@@ -106,8 +165,8 @@ class PlanetsCarousell extends StatelessWidget {
                           PageRouteBuilder(
                             transitionDuration: Duration(seconds: 1),
                             pageBuilder: (_, __, ___) => PlanetScreen(
-                              planetName: text0[info.index],
-                              planetImage: images[info.index],
+                              planetName: planetsName[info.index],
+                              planetImage: images[planetsName[info.index]],
                             ),
                           ),
                         );
@@ -123,7 +182,7 @@ class PlanetsCarousell extends StatelessWidget {
             ],
           );
         }),
-        itemCount: 3);
+        itemCount: images.length);
   }
 }
 

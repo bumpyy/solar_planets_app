@@ -32,6 +32,9 @@ dev_dependencies:
   flutter_villains: ^1.2.1
   flutter_screenutil: ^1.0.2
   align_positioned: ^1.2.5
+  flutter_parallax: ^0.1.2
+  parallax_image: ^0.3.1+1
+
 
 
 # For information on the generic Dart part of this file, see the
