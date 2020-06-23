@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue,
         backgroundColor: Colors.black,
         textTheme: TextTheme(
-          body1: TextStyle(fontFamily: 'teko', color: Colors.white),
+          bodyText2: TextStyle(fontFamily: 'teko', color: Colors.white),
         ),
       ),
       home: SafeArea(child: new SolarPlanets(title: 'Solar Planets Skripsi')),

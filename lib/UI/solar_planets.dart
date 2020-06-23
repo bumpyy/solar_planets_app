@@ -4,7 +4,6 @@ import 'package:solarplanetsapp/UI/planet_screen.dart';
 import 'package:transformer_page_view/transformer_page_view.dart';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:align_positioned/align_positioned.dart';
 
 class SolarPlanets extends StatefulWidget {
   SolarPlanets({Key key, this.title}) : super(key: key);
@@ -16,16 +15,16 @@ class SolarPlanets extends StatefulWidget {
 }
 
 Map<String, String> images = {
-  "BUMI": 'assets/images/earth-render-small.webp',
-  "JUPITER": 'assets/images/jupiter-render-small.webp',
-  "MARS": 'assets/images/mars-render-small.webp',
   "MERKURIUS": 'assets/images/mercury-render-small.webp',
+  "VENUS": 'assets/images/venus-render-small.webp',
+  "BUMI": 'assets/images/earth-render-small.webp',
   "BULAN": 'assets/images/moon-render-small.webp',
+  "MARS": 'assets/images/mars-render-small.webp',
+  "JUPITER": 'assets/images/jupiter-render-small.webp',
   "NEPTUNUS": 'assets/images/neptune-render-small.webp',
-  "PLUTO": 'assets/images/pluto-render-small.webp',
   "SATURNUS": 'assets/images/saturn-render-small.webp',
   "URANUS": 'assets/images/uranus-render-small.webp',
-  "VENUS": 'assets/images/venus-render-small.webp',
+  "PLUTO": 'assets/images/pluto-render-small.webp',
 };
 
 List<String> planetsName = [
@@ -42,16 +41,28 @@ List<String> planetsName = [
 ];
 
 Map<String, String> planetsNick = {
-  "BUMI": 'Blue Planet',
-  "JUPITER": 'Giant Planet',
-  "MARS": 'Red Planet',
   "MERKURIUS": 'Swift Planet',
+  "VENUS": 'Morning star',
+  "BUMI": 'Blue Planet',
   "BULAN": '',
+  "MARS": 'Red Planet',
+  "JUPITER": 'Giant Planet',
   "NEPTUNUS": 'Big Blue Planet',
-  "PLUTO": 'The forgoten',
   "SATURNUS": 'Ringed Planet',
   "URANUS": 'Ice Giant',
-  "VENUS": 'Morning star',
+  "PLUTO": 'The forgoten',
+};
+Map<String, Map<String, String>> planetTemp = {
+  "MERKURIUS": {'day': 'Swift Planet', 'night': ''},
+  "VENUS": {'day': 'Swift Planet', 'night': ''},
+  "BUMI": {'day': 'Swift Planet', 'night': ''},
+  "BULAN": {'day': 'Swift Planet', 'night': ''},
+  "MARS": {'day': 'Swift Planet', 'night': ''},
+  "JUPITER": {'day': 'Swift Planet', 'night': ''},
+  "NEPTUNUS": {'day': 'Swift Planet', 'night': ''},
+  "SATURNUS": {'day': 'Swift Planet', 'night': ''},
+  "URANUS": {'day': 'Swift Planet', 'night': ''},
+  "PLUTO": {'day': 'Swift Planet', 'night': ''},
 };
 
 int planetIndex = 0;
@@ -179,18 +190,17 @@ class _SolarPlanetsState extends State<SolarPlanets>
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    controller = AnimationController(
-      duration: Duration(seconds: 1),
-      vsync: this,
-    );
+//    controller = AnimationController(
+//      duration: Duration(seconds: 1),
+//      vsync: this,
+//    );
 
-    controller.forward();
-
-    controller.addListener(() {
-      print(controller.value);
-    });
+//    controller.forward();
+//
+//    controller.addListener(() {
+//      print(controller.value);
+//    });
 //    ScreenUtil.init(context);
   }
 
@@ -238,55 +248,95 @@ class _SolarPlanetsState extends State<SolarPlanets>
               ),
             ),
           ),
-          Positioned(
-            bottom: 80,
-            left: 1,
-            right: 1,
-            child: Divider(
+          Stack(
+            children: <Widget>[
+              Positioned(
+                bottom: 80,
+                left: 1,
+                right: 1,
+                child: Divider(
 //              height: 50,
-              thickness: 1, color: Colors.white,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: AlignPositioned(
-              alignment: Alignment.bottomCenter,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Expanded(
-                    child: AutoSizeText(
-                      'at\nDay',
-                      style: TextStyle(
-//                          wordSpacing: 10,
-                        fontSize: MediaQuery.of(context).size.height * .03,
-                        height: 1,
-                        color: Colors.grey,
-                        fontFamily: 'Teko',
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: AutoSizeText(
-                      'at\nDay',
-                      style: TextStyle(
-//                          wordSpacing: 10,
-                        fontSize: MediaQuery.of(context).size.height * .03,
-                        height: 1,
-                        color: Colors.grey,
-                        fontFamily: 'Teko',
-                      ),
-                    ),
-                  ),
-                  Expanded(
-//                  flex: ,
-                    child: SizedBox(
-                      width: 20,
-                    ),
-                  )
-                ],
+                  thickness: 1, color: Color.fromARGB(120, 255, 255, 255),
+                ),
               ),
-            ),
+              Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: AlignPositioned(
+                  alignment: Alignment.bottomCenter,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: <Widget>[
+                      Expanded(
+                        //At day
+                        child: Row(
+                          children: <Widget>[
+                            AutoSizeText(
+                              'at\nDay',
+                              style: TextStyle(
+//                          wordSpacing: 10,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                height: 1,
+                                color: Colors.grey,
+                                fontFamily: 'Teko',
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            AutoSizeText(
+                              'at\nDay',
+                              style: TextStyle(
+//                          wordSpacing: 10,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                height: 1,
+                                color: Colors.grey,
+                                fontFamily: 'Teko',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        child: Row(
+                          children: <Widget>[
+                            AutoSizeText(
+                              'at\nNight',
+                              style: TextStyle(
+//                          wordSpacing: 10,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                height: 1,
+                                color: Colors.grey,
+                                fontFamily: 'Teko',
+                              ),
+                            ),
+                            AutoSizeText(
+                              'at\nNight',
+                              style: TextStyle(
+//                          wordSpacing: 10,
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .03,
+                                height: 1,
+                                color: Colors.grey,
+                                fontFamily: 'Teko',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Expanded(
+//                  flex: ,
+                        child: SizedBox(
+                          width: 20,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_parallax/flutter_parallax.dart';
-import 'package:transformer_page_view/parallax.dart';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -25,7 +24,7 @@ class _PlanetScreenState extends State<PlanetScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final TextStyle style = Theme.of(context).textTheme.title.copyWith(
+    final TextStyle style = Theme.of(context).textTheme.headline6.copyWith(
           fontSize: 50,
           fontWeight: FontWeight.normal,
         );
