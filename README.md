@@ -1,16 +1,14 @@
 # solarplanetsapp
 
-Aplikasi pengenalan tata surya untuk ~skripsi~ (gak jadi)
+Aplikasi pengenalan tata surya untuk ~~gak jadi~~ (gak jadi)
 
-## Getting Started
+Solar system guide app based on a concept app i found on Dribbble, link bellow.
 
-This project is a starting point for a Flutter application.
+<https://dribbble.com/shots/3866044-Planets>
 
-A few resources to get you started if this is your first Flutter project:
+## Note
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Web version need to be compiled using flutter bellow v.2.8.0 for app to work, it's problem from flutter side.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+I'm using flutter v2.5.3, you can use [FVM](https://fvm.app/)
+ to manage fluter version.

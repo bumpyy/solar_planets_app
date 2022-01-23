@@ -80,7 +80,7 @@ class _PlanetScreenState extends State<PlanetScreen> {
                           widget.planetName,
                           maxLines: 1,
                           style: TextStyle(
-                              color: Color.fromARGB(140, 255, 255, 255),
+                              color: const Color.fromARGB(140, 255, 255, 255),
                               fontSize:
                                   MediaQuery.of(context).size.height * .17),
                         ),
