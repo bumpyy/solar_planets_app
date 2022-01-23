@@ -2,6 +2,7 @@ import 'package:align_positioned/align_positioned.dart';
 import 'package:another_transformer_page_view/another_transformer_page_view.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:solarplanetsapp/Const/planets_data.dart';
 import 'package:solarplanetsapp/Model/planet.dart';
 
@@ -47,9 +48,10 @@ class PlanetsCarousell extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     ParallaxContainer(
-                      child: const Icon(
-                        Icons.ac_unit,
-                        color: Colors.white,
+                      child: Lottie.asset(
+                        'assets/lottie/planets.json',
+                        height: 25,
+                        fit: BoxFit.cover,
                       ),
                       position: info.position!,
                       translationFactor: 300.0,

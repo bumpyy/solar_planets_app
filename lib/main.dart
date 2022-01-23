@@ -9,11 +9,8 @@ List<Color> list = [Colors.yellow, Colors.green, Colors.blue];
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-//    ScreenUtil.init(context);
-//    ScreenUtil.init(context, width: 720, height: 1520, allowFontScaling: true);
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
@@ -28,7 +25,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontFamily: 'teko', color: Colors.white),
         ),
       ),
-      home: const SolarPlanets(title: 'Solar Planets Skripsi'),
+      home: const SolarPlanets(),
     );
   }
 }
