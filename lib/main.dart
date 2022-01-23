@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './UI/solar_planets.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(const MyApp());
 List<Color> list = [Colors.yellow, Colors.green, Colors.blue];
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -16,17 +18,17 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return new MaterialApp(
+    return MaterialApp(
       scrollBehavior: AppScrollBehavior(),
       title: 'Flutter Demo',
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.blue,
         backgroundColor: Colors.black,
-        textTheme: TextTheme(
+        textTheme: const TextTheme(
           bodyText2: TextStyle(fontFamily: 'teko', color: Colors.white),
         ),
       ),
-      home: SafeArea(child: new SolarPlanets(title: 'Solar Planets Skripsi')),
+      home: const SolarPlanets(title: 'Solar Planets Skripsi'),
     );
   }
 }
