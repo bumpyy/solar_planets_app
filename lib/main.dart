@@ -1,7 +1,7 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import './UI/solar_planets.dart';
-import 'package:flutter/cupertino.dart';
 
 void main() => runApp(new MyApp());
 List<Color> list = [Colors.yellow, Colors.green, Colors.blue];
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
     return new MaterialApp(
+      scrollBehavior: AppScrollBehavior(),
       title: 'Flutter Demo',
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.blue,
@@ -28,4 +29,12 @@ class MyApp extends StatelessWidget {
       home: SafeArea(child: new SolarPlanets(title: 'Solar Planets Skripsi')),
     );
   }
+}
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+        PointerDeviceKind.touch,
+        PointerDeviceKind.mouse,
+      };
 }
