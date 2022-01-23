@@ -1,6 +1,6 @@
 # solarplanetsapp
 
-Aplikasi pengenalan tata surya untuk skripsi
+Aplikasi pengenalan tata surya untuk ~skripsi~ (gak jadi)
 
 ## Getting Started
 
