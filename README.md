@@ -1,6 +1,6 @@
 # solarplanetsapp
 
-Aplikasi pengenalan tata surya untuk ~~gak jadi~~ (gak jadi)
+Aplikasi pengenalan tata surya untuk ~~Skripsi~~ (gak jadi)
 
 Solar system guide app based on a concept app i found on Dribbble, link bellow.
 
