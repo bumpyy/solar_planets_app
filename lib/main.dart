@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import './UI/solar_planets.dart';
 
 void main() => runApp(const MyApp());
-List<Color> list = [Colors.yellow, Colors.green, Colors.blue];
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
       scrollBehavior: AppScrollBehavior(),
-      title: 'Flutter Demo',
+      title: 'Solar system guide',
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.blue,
         backgroundColor: Colors.black,

@@ -41,27 +41,6 @@ class _SolarPlanetsState extends State<SolarPlanets>
               const PlanetsCarousell(
                 updatePlanetIndexFunc: updatePlanetIndex,
               ),
-              IgnorePointer(
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: AlignmentDirectional.center,
-                      end: AlignmentDirectional.bottomCenter,
-                      colors: <Color>[
-                        Color.fromRGBO(0, 0, 0, 0.0),
-                        Color.fromARGB(50, 0, 0, 0),
-                        Color.fromARGB(100, 0, 0, 0),
-                        Color.fromARGB(220, 0, 0, 0),
-                        //                    Color.fromARGB(255, 0, 0, 0)
-                      ],
-                      //                radius: 5.0,
-                      //                center: Alignment.topCenter,
-                    ),
-                  ),
-                ),
-              ),
               Stack(
                 children: <Widget>[
                   const Positioned(
@@ -107,7 +86,7 @@ class _SolarPlanetsState extends State<SolarPlanets>
                                           type: PageTransitionType.fade,
                                           duration: const Duration(seconds: 1),
                                           reverseDuration:
-                                              const Duration(milliseconds: 600),
+                                              const Duration(seconds: 1),
                                           opaque: true,
                                           child: PlanetScreen(
                                             planetName: selectedPlanet.name,
@@ -127,7 +106,6 @@ class _SolarPlanetsState extends State<SolarPlanets>
                                       primary: const Color.fromRGBO(
                                           0, 0, 0, 0), // <-- Button color
                                       side: const BorderSide(
-                                        width: 1.0,
                                         color:
                                             Color.fromRGBO(255, 255, 255, .3),
                                       ),

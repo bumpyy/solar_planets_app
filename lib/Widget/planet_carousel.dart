@@ -15,7 +15,7 @@ Widget _flightShuttleBuilder(
 ) {
   return DefaultTextStyle(
     softWrap: false,
-    style: DefaultTextStyle.of(toHeroContext).style,
+    style: DefaultTextStyle.of(fromHeroContext).style,
     child: toHeroContext.widget,
   );
 }
@@ -31,95 +31,98 @@ class PlanetsCarousell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TransformerPageView(
-        onPageChanged: (index) {
-          selectedPlanet = planets[index ?? 0];
-          updatePlanetIndexFunc(selectedPlanet);
-        },
-        loop: false,
-        transformer:
-            PageTransformerBuilder(builder: (Widget child, TransformInfo info) {
-          return Stack(
-            alignment: AlignmentDirectional.center,
-            children: <Widget>[
-              Positioned(
-                top: MediaQuery.of(context).size.height * .1,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    ParallaxContainer(
-                      child: Lottie.asset(
-                        'assets/lottie/planets.json',
-                        height: 25,
-                        fit: BoxFit.cover,
-                      ),
-                      position: info.position!,
-                      translationFactor: 300.0,
+      onPageChanged: (index) {
+        selectedPlanet = planets[index ?? 0];
+        updatePlanetIndexFunc(selectedPlanet);
+      },
+      loop: false,
+      // viewportFraction: .2,
+      itemCount: planets.length,
+      viewportFraction: .6,
+      transformer:
+          PageTransformerBuilder(builder: (Widget child, TransformInfo info) {
+        return Stack(
+          alignment: AlignmentDirectional.center,
+          children: <Widget>[
+            Positioned(
+              top: MediaQuery.of(context).size.height * .1,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  ParallaxContainer(
+                    child: Lottie.asset(
+                      'assets/lottie/planets.json',
+                      height: 25,
+                      fit: BoxFit.cover,
                     ),
-                    //
-                    //planet name
-                    ParallaxContainer(
-                      child: Hero(
-                        flightShuttleBuilder: _flightShuttleBuilder,
-                        child: Center(
-                          child: AutoSizeText(
-                            selectedPlanet.name,
+                    position: info.position!,
+                    translationFactor: 300.0,
+                  ),
+                  //
+                  //planet name
+                  ParallaxContainer(
+                    child: Hero(
+                      flightShuttleBuilder: _flightShuttleBuilder,
+                      child: Center(
+                        child: AutoSizeText(
+                          planets[info.index!].name,
 //                          maxLines: 1,
-                            style: TextStyle(
-                                fontSize:
-                                    MediaQuery.of(context).size.height * .15),
-                          ),
+                          style: TextStyle(
+                              fontSize:
+                                  MediaQuery.of(context).size.height * .15),
                         ),
-                        tag: 'planetName',
                       ),
-                      position: info.position!,
-                      translationFactor: 300.0,
+                      tag: 'planetName',
                     ),
-                  ],
-                ),
-              ),
-              //planet nickname
-              Positioned(
-                top: MediaQuery.of(context).size.height * .3,
-                child: ParallaxContainer(
-                  child: AutoSizeText(
-                    selectedPlanet.nick,
-                    style: TextStyle(
-                      fontSize: MediaQuery.of(context).size.height * .03,
-                      color: Colors.grey,
-                      fontFamily: 'Teko',
-                    ),
+                    position: info.position!,
+                    translationFactor: 100.0,
                   ),
-                  position: info.position!,
-                  translationFactor: 400.0,
-                ),
+                ],
               ),
+            ),
+            //planet nickname
+            Positioned(
+              top: MediaQuery.of(context).size.height * .3,
+              child: ParallaxContainer(
+                child: AutoSizeText(
+                  planets[info.index!].nick,
+                  style: TextStyle(
+                    fontSize: MediaQuery.of(context).size.height * .03,
+                    color: Colors.grey,
+                    fontFamily: 'Teko',
+                  ),
+                ),
+                position: info.position!,
+                translationFactor: 400.0,
+              ),
+            ),
 
-              //Planet images
-              AlignPositioned(
-                moveByContainerHeight: .4,
-                child: ParallaxContainer(
-                  child: OverflowBox(
-                    child: GestureDetector(
-                      child: Hero(
-                        child: Image.asset(
-                          selectedPlanet.image,
-                          width: MediaQuery.of(context).size.height * .9,
-                        ),
-                        tag: 'planetImage',
+            //Planet images
+            AlignPositioned(
+              moveByContainerHeight: .4,
+              child: ParallaxContainer(
+                child: OverflowBox(
+                  child: GestureDetector(
+                    child: Hero(
+                      child: Image.asset(
+                        planets[info.index!].image,
+                        width: MediaQuery.of(context).size.height * .9,
                       ),
-                      onTap: () {},
+                      tag: 'planetImage',
                     ),
-                    maxWidth: MediaQuery.of(context).size.width * 1.5,
-//                    alignment: Alignment(0, (heightPx >= 760.0) ? 2.3 : 3.3),
+                    onTap: () {},
                   ),
-                  position: info.position!,
-                  translationFactor: 450.0,
+                  maxWidth: MediaQuery.of(context).size.width * 1.5,
+//                    alignment: Alignment(0, (heightPx >= 760.0) ? 2.3 : 3.3),
                 ),
+                position: info.position!,
+                translationFactor: 600.0,
               ),
-            ],
-          );
-        }),
-        itemCount: planets.length);
+            ),
+          ],
+        );
+      }),
+    );
   }
 }

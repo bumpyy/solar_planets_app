@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/scheduler.dart';
 
 class PlanetScreen extends StatefulWidget {
-  final String? planetImage;
+  final String planetImage;
   final String planetName;
 
   const PlanetScreen(
@@ -48,69 +48,79 @@ class _PlanetScreenState extends State<PlanetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButton: Padding(
-      //   padding: const EdgeInsets.only(top: 150),
-      //   child: FloatingActionButton(
-      //     onPressed: () {
-      //       Navigator.of(context).pop();
-      //     },
-      //     child: const Icon(
-      //       Icons.chevron_left,
-      //       color: Colors.black,
-      //     ),
-      //     backgroundColor: const Color.fromRGBO(255, 255, 255, 0.3),
-      //   ),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Stack(children: [
-          ListView(
-            controller: _scrollController,
-            children: <Widget>[
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .6,
-                child: Stack(
-                  alignment: AlignmentDirectional.topCenter,
-                  children: <Widget>[
-                    Positioned(
-                      top: 0,
-                      child: Hero(
-                        child: AutoSizeText(
-                          widget.planetName,
-                          maxLines: 1,
-                          style: TextStyle(
-                              color: const Color.fromARGB(140, 255, 255, 255),
-                              fontSize:
-                                  MediaQuery.of(context).size.height * .17),
-                        ),
-                        tag: 'planetName',
-                      ),
-                    ),
-                    AlignPositioned(
-                      moveByContainerHeight: .05,
-                      child: Hero(
-                        tag: 'planetImage',
-                        child: Image.asset(
-                          widget.planetImage!,
-                          width: MediaQuery.of(context).size.width * .9,
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 50.0,
+            ),
+            child: ListView(
+              controller: _scrollController,
+              children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * .6,
+                  child: Stack(
+                    alignment: AlignmentDirectional.topCenter,
+                    children: <Widget>[
+                      Positioned(
+                        top: 0,
+                        child: Hero(
+                          child: AutoSizeText(
+                            widget.planetName,
+                            maxLines: 1,
+                            style: TextStyle(
+                                color: const Color.fromARGB(140, 255, 255, 255),
+                                fontSize:
+                                    MediaQuery.of(context).size.height * .17),
+                          ),
+                          tag: 'planetName',
                         ),
                       ),
-                    ),
-                  ],
+                      AlignPositioned(
+                        moveByContainerHeight: .12,
+                        child: Hero(
+                          tag: 'planetImage',
+                          child: Image.asset(
+                            widget.planetImage,
+                            width: MediaQuery.of(context).size.width * .9,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Column(
-                children: [
-                  for (int i = 0; i < 133; i++)
-                    const Text(
-                        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum")
-                ],
-              )
-            ],
+                ScrollConfiguration(
+                  behavior: RemoveScrollGlow(),
+                  child: Column(
+                    children: [
+                      SingleChildScrollView(
+                        padding: const EdgeInsets.only(
+                          left: 30.0,
+                          right: 10.0,
+                        ),
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: const [
+                            InfoCard(),
+                            InfoCard(),
+                            InfoCard(),
+                            InfoCard(),
+                            InfoCard(),
+                            InfoCard(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
+
+          // Arrow button
           Positioned(
-            top: 25,
+            top: 20,
             right: 15,
             child: Hero(
               tag: 'arrow',
@@ -127,7 +137,6 @@ class _PlanetScreenState extends State<PlanetScreen> {
                   primary:
                       const Color.fromRGBO(0, 0, 0, 0.0), // <-- Button color
                   side: const BorderSide(
-                    width: 1.0,
                     color: Color.fromRGBO(255, 255, 255, .3),
                   ),
                   onPrimary: Colors.red, // <-- Splash color
@@ -138,5 +147,69 @@ class _PlanetScreenState extends State<PlanetScreen> {
         ]),
       ),
     );
+  }
+}
+
+class InfoCard extends StatelessWidget {
+  const InfoCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: const Color.fromARGB(255, 36, 36, 47),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          15.0,
+          15.0,
+          25.0,
+          15.0,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Icon(
+              Icons.monitor_weight_outlined,
+              color: Colors.white,
+            ),
+            const Text(
+              "Your Weight",
+              style: TextStyle(
+                fontSize: 15.0,
+                color: Color.fromRGBO(250, 250, 255, .4),
+              ),
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  "27",
+                  style: TextStyle(
+                    fontSize: 55.0,
+                    color: Color.fromRGBO(250, 250, 255, .4),
+                  ),
+                ),
+                Text(
+                  "KL",
+                  style: TextStyle(
+                    fontSize: 25.0,
+                    color: Color.fromRGBO(250, 250, 255, .4),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class RemoveScrollGlow extends ScrollBehavior {
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
   }
 }
