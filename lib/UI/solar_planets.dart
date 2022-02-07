@@ -80,6 +80,21 @@ class _SolarPlanetsState extends State<SolarPlanets>
                                   tag: "arrow",
                                   child: ElevatedButton(
                                     onPressed: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   PageRouteBuilder(
+                                      //       pageBuilder: (_, __, ___) =>
+                                      //           PlanetScreen(
+                                      //             planetName:
+                                      //                 selectedPlanet.name,
+                                      //             planetImage:
+                                      //                 selectedPlanet.image,
+                                      //           ),
+                                      //       transitionDuration:
+                                      //           Duration(seconds: 1),
+                                      //       opaque: false),
+                                      // );
+
                                       Navigator.push(
                                         context,
                                         PageTransition(

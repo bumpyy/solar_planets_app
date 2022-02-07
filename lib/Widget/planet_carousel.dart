@@ -103,15 +103,12 @@ class PlanetsCarousell extends StatelessWidget {
               moveByContainerHeight: .4,
               child: ParallaxContainer(
                 child: OverflowBox(
-                  child: GestureDetector(
-                    child: Hero(
-                      child: Image.asset(
-                        planets[info.index!].image,
-                        width: MediaQuery.of(context).size.height * .9,
-                      ),
-                      tag: 'planetImage',
+                  child: Hero(
+                    child: Image.asset(
+                      planets[info.index!].image,
+                      width: MediaQuery.of(context).size.height * .9,
                     ),
-                    onTap: () {},
+                    tag: 'planetImage',
                   ),
                   maxWidth: MediaQuery.of(context).size.width * 1.5,
 //                    alignment: Alignment(0, (heightPx >= 760.0) ? 2.3 : 3.3),

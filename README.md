@@ -15,7 +15,7 @@ TODO
 
 ## Note
 
-Web version need to be compiled using flutter bellow v.2.8.0 for app to work, it's problem from flutter side.
+Dont use flutter version 2.8.x, for app to work proprely, either use version below (e.g: 2.5.x) or above it (e.g: 2.10.x),
+It's problem from flutter side.
 
-I'm using flutter v2.5.3, you can use [FVM](https://fvm.app/)
- to manage fluter version.
+the version i've use without problem are 2.5.3 and 2.10.0, you can also use [FVM](https://fvm.app/) to manage fluter version.
