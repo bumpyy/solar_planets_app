@@ -48,111 +48,307 @@ class _PlanetScreenState extends State<PlanetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      extendBody: true,
       backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Stack(children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 50.0,
-            ),
-            child: ListView(
-              controller: _scrollController,
-              children: <Widget>[
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * .6,
-                  child: Stack(
-                    alignment: AlignmentDirectional.topCenter,
-                    children: <Widget>[
-                      Positioned(
-                        top: 0,
-                        child: Hero(
-                          child: AutoSizeText(
-                            widget.planetName,
-                            maxLines: 1,
-                            style: TextStyle(
-                                color: const Color.fromARGB(140, 255, 255, 255),
-                                fontSize:
-                                    MediaQuery.of(context).size.height * .17),
-                          ),
-                          tag: 'planetName',
-                        ),
+      body: Stack(children: [
+        ListView(
+          controller: _scrollController,
+          children: <Widget>[
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .6,
+              child: Stack(
+                alignment: AlignmentDirectional.topCenter,
+                children: <Widget>[
+                  Positioned(
+                    top: 0,
+                    child: Hero(
+                      child: AutoSizeText(
+                        widget.planetName,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: const Color.fromARGB(140, 255, 255, 255),
+                            fontSize: MediaQuery.of(context).size.height * .17),
                       ),
-                      AlignPositioned(
-                        moveByContainerHeight: .12,
-                        child: Hero(
-                          tag: 'planetImage',
-                          child: Image.asset(
-                            widget.planetImage,
-                            width: MediaQuery.of(context).size.width * .9,
-                          ),
-                        ),
+                      tag: 'planetName',
+                    ),
+                  ),
+                  AlignPositioned(
+                    moveByContainerHeight: .12,
+                    child: Hero(
+                      tag: 'planetImage',
+                      child: Image.asset(
+                        widget.planetImage,
+                        width: MediaQuery.of(context).size.width * .9,
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                ScrollConfiguration(
-                  behavior: RemoveScrollGlow(),
-                  child: Column(
-                    children: [
-                      SingleChildScrollView(
-                        padding: const EdgeInsets.only(
-                          left: 30.0,
-                          right: 10.0,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: const [
-                            InfoCard(),
-                            InfoCard(),
-                            InfoCard(),
-                            InfoCard(),
-                            InfoCard(),
-                            InfoCard(),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-
-          // Arrow button
-          Positioned(
-            top: 20,
-            right: 15,
-            child: Hero(
-              tag: 'arrow',
-              child: ElevatedButton(
-                onPressed: _scrollToTopAndPop,
-                child: const Icon(
-                  Icons.keyboard_arrow_up,
-                  color: Color.fromRGBO(255, 255, 255, 0.5),
-                  size: 35,
-                ),
-                style: ElevatedButton.styleFrom(
-                  shape: const CircleBorder(),
-                  padding: const EdgeInsets.all(8),
-                  primary:
-                      const Color.fromRGBO(0, 0, 0, 0.0), // <-- Button color
-                  side: const BorderSide(
-                    color: Color.fromRGBO(255, 255, 255, .3),
-                  ),
-                  onPrimary: Colors.red, // <-- Splash color
-                ),
+                ],
               ),
             ),
-          )
-        ]),
+            ScrollConfiguration(
+              behavior: RemoveScrollGlow(),
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.only(
+                      left: 30.0,
+                      right: 10.0,
+                    ),
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: const [
+                        InfoCard(
+                          icon: Icons.monitor_weight_outlined,
+                          title: "Your Weight",
+                          scaleUnit: "KL",
+                          value: "27",
+                        ),
+                        InfoCard(
+                          icon: Icons.cake_outlined,
+                          title: "Your Age",
+                          scaleUnit: "YRS",
+                          value: "82",
+                          scaleUnitSub: "OLD",
+                        ),
+                        InfoCard(
+                          icon: Icons.monitor_weight_outlined,
+                          title: "Your Weight",
+                          scaleUnit: "KL",
+                          value: "27",
+                        ),
+                        InfoCard(
+                          icon: Icons.monitor_weight_outlined,
+                          title: "Your Weight",
+                          scaleUnit: "KL",
+                          value: "27",
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 50.0,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SectionTitle(title: "PLANETS STATS"),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 5.0,
+                            bottom: 15.0,
+                          ),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              PlanetStatsItem(
+                                title: "DAY",
+                                subtitle: "LENGTH",
+                                value: "58,6",
+                                subText: "TERRESTRIAL DAYS",
+                              ),
+                              PlanetStatsItem(
+                                title: "YEAR",
+                                subtitle: "LENGTH",
+                                value: "87,87",
+                                subText: "TERRESTRIAL DAYS",
+                                verticalBorder: true,
+                              ),
+                              PlanetStatsItem(
+                                title: "MOONS",
+                                value: "0",
+                                subText: "--",
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SectionTitle(
+                          title: "SIZE COMPARATION TO",
+                          subTitle: "venus",
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+
+        // Arrow button
+        Positioned(
+          top: 50,
+          right: 20,
+          child: Hero(
+            tag: 'arrow',
+            child: ElevatedButton(
+              onPressed: _scrollToTopAndPop,
+              child: const Icon(
+                Icons.keyboard_arrow_up,
+                color: Color.fromRGBO(255, 255, 255, 0.5),
+                size: 35,
+              ),
+              style: ElevatedButton.styleFrom(
+                shape: const CircleBorder(),
+                padding: const EdgeInsets.all(8),
+                primary: const Color.fromRGBO(0, 0, 0, 0.0), // <-- Button color
+                side: const BorderSide(
+                  color: Color.fromRGBO(255, 255, 255, .3),
+                ),
+                onPrimary: Colors.red, // <-- Splash color
+              ),
+            ),
+          ),
+        )
+      ]),
+    );
+  }
+}
+
+class SectionTitle extends StatelessWidget {
+  final String title;
+  final String? subTitle;
+  const SectionTitle({
+    Key? key,
+    required this.title,
+    this.subTitle,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        vertical: 10.0,
+      ),
+      width: double.maxFinite,
+      decoration: const BoxDecoration(
+        border: Border.symmetric(
+          horizontal: BorderSide(
+            color: Colors.white10,
+            width: 2.0,
+          ),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15.0,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 20.0,
+                color: Colors.white70,
+              ),
+            ),
+            if (subTitle != null)
+              Text(
+                subTitle!,
+                style: const TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.white38,
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PlanetStatsItem extends StatelessWidget {
+  final String title;
+  final String? subtitle;
+  final String value;
+  final String? subText;
+  final bool verticalBorder;
+
+  const PlanetStatsItem({
+    Key? key,
+    required this.title,
+    this.subtitle,
+    required this.value,
+    this.subText,
+    this.verticalBorder = false,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        padding: const EdgeInsets.all(15.0),
+        decoration: verticalBorder
+            ? const BoxDecoration(
+                border: Border.symmetric(
+                  vertical: BorderSide(
+                    color: Colors.white10,
+                    width: 2.0,
+                  ),
+                ),
+              )
+            : null,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Text(
+                  '$title ',
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                  ),
+                ),
+                if (subtitle != null)
+                  Text(
+                    subtitle!,
+                    style: const TextStyle(
+                      fontSize: 20.0,
+                      color: Colors.white54,
+                    ),
+                  ),
+              ],
+            ),
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 40,
+              ),
+            ),
+            if (subText != null)
+              Text(
+                subText!,
+                style: const TextStyle(
+                  height: .8,
+                  fontSize: 20.0,
+                  color: Colors.white54,
+                ),
+              )
+          ],
+        ),
       ),
     );
   }
 }
 
 class InfoCard extends StatelessWidget {
+  final IconData? icon;
+  final String title;
+  final String value;
+  final String scaleUnit;
+  final String? scaleUnitSub;
+
   const InfoCard({
     Key? key,
+    this.icon,
+    required this.title,
+    required this.value,
+    required this.scaleUnit,
+    this.scaleUnitSub,
   }) : super(key: key);
 
   @override
@@ -163,39 +359,61 @@ class InfoCard extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(
           15.0,
           15.0,
-          25.0,
+          30.0,
           15.0,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Icon(
-              Icons.monitor_weight_outlined,
-              color: Colors.white,
-            ),
-            const Text(
-              "Your Weight",
-              style: TextStyle(
-                fontSize: 15.0,
+            if (icon != null)
+              Icon(
+                icon,
+                color: Colors.white,
+              ),
+            const SizedBox(height: 10.0),
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 17.0,
                 color: Color.fromRGBO(250, 250, 255, .4),
               ),
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
-                  "27",
-                  style: TextStyle(
-                    fontSize: 55.0,
-                    color: Color.fromRGBO(250, 250, 255, .4),
+              children: [
+                FittedBox(
+                  fit: BoxFit.fitHeight,
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 55.0,
+                      height: 1, //SETTING THIS CAN SOLVE YOUR PROBLEM
+                    ),
                   ),
                 ),
-                Text(
-                  "KL",
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    color: Color.fromRGBO(250, 250, 255, .4),
-                  ),
+                const SizedBox(width: 5.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      scaleUnit,
+                      style: const TextStyle(
+                        fontSize: 25.0,
+                        height: 1, //SETTING THIS CAN SOLVE YOUR PROBLEM
+                      ),
+                    ),
+                    if (scaleUnitSub != null)
+                      Text(
+                        scaleUnitSub!,
+                        style: const TextStyle(
+                          fontSize: 17.0,
+                          color: Color.fromRGBO(250, 250, 255, .4),
+                          height: .8, //SETTING THIS CAN SOLVE YOUR PROBLEM
+                        ),
+                      ),
+                  ],
                 ),
               ],
             )
