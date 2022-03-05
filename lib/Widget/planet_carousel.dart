@@ -87,8 +87,8 @@ class PlanetsCarousell extends StatelessWidget {
               child: ParallaxContainer(
                 child: AutoSizeText(
                   planets[info.index!].nick,
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.height * .03,
+                  style: const TextStyle(
+                    fontSize: 3,
                     color: Colors.grey,
                     fontFamily: 'Teko',
                   ),

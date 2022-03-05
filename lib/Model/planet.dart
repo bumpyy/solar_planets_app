@@ -2,8 +2,8 @@ class Planet {
   final String name;
   final String nick;
   final String image;
-  final String tempDay;
-  final String tempNight;
+  final int tempDay;
+  final int tempNight;
 
   Planet(
       {required this.name,

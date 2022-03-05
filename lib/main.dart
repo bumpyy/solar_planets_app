@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Solar system guide',
       theme: ThemeData.light().copyWith(
         primaryColor: Colors.blue,
-        backgroundColor: Colors.black,
+        backgroundColor: const Color(0xff080916),
         textTheme: const TextTheme(
           bodyText2: TextStyle(fontFamily: 'teko', color: Colors.white),
         ),
@@ -33,6 +33,7 @@ class AppScrollBehavior extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
         PointerDeviceKind.touch,
+        PointerDeviceKind.stylus,
         PointerDeviceKind.mouse,
       };
 }

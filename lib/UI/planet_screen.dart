@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:align_positioned/align_positioned.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -50,7 +51,7 @@ class _PlanetScreenState extends State<PlanetScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       extendBody: true,
-      backgroundColor: Colors.black,
+      backgroundColor: const Color(0xff080916),
       body: Stack(children: [
         ListView(
           controller: _scrollController,
@@ -168,6 +169,49 @@ class _PlanetScreenState extends State<PlanetScreen> {
                           title: "SIZE COMPARATION TO",
                           subTitle: "venus",
                         ),
+                        const SectionTitle(
+                          title: "FUN FACT",
+                        ),
+                        CarouselSlider(
+                          options: CarouselOptions(
+                            viewportFraction: 1,
+                            enableInfiniteScroll: false,
+                          ),
+                          items: [1, 2, 3, 4, 5].map((i) {
+                            return Builder(
+                              builder: (BuildContext context) {
+                                return Stack(
+                                  children: [
+                                    Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        '0$i',
+                                        style: const TextStyle(
+                                          fontSize: 200.0,
+                                          height: 1.2,
+                                          color: Colors.white10,
+                                        ),
+                                      ),
+                                    ),
+                                    const Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        "After the Earth, Mercury is the second densest planet. Despite it's small size. Mercury is very dense because its is composed mainly of heavy metals and rock",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          height: 2,
+                                          fontSize: 14.0,
+                                          fontFamily: 'roboto',
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                );
+                              },
+                            );
+                          }).toList(),
+                        )
                       ],
                     ),
                   ),

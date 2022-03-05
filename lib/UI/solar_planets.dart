@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odometer/odometer.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:solarplanetsapp/Const/planets_data.dart';
 import 'package:solarplanetsapp/Model/planet.dart';
@@ -27,6 +28,12 @@ class _SolarPlanetsState extends State<SolarPlanets>
 
   @override
   Widget build(BuildContext context) {
+    updatePlanetIndex(Planet planet) {
+      setState(() {
+        selectedPlanet = planet;
+      });
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SafeArea(
@@ -38,36 +45,52 @@ class _SolarPlanetsState extends State<SolarPlanets>
           ),
           child: Stack(
             children: <Widget>[
-              const PlanetsCarousell(
+              PlanetsCarousell(
                 updatePlanetIndexFunc: updatePlanetIndex,
               ),
-              Stack(
-                children: <Widget>[
-                  const Positioned(
-                    bottom: 80,
-                    left: 1,
-                    right: 1,
-                    child: Divider(
-                      //              height: 50,
-                      thickness: 1, color: Color.fromARGB(120, 255, 255, 255),
+              AlignPositioned(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black54,
+                        Colors.black,
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(15.0),
-                    child: AlignPositioned(
-                      alignment: Alignment.bottomCenter,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 5,
+                      left: 15,
+                      right: 15,
+                      top: 15,
+                    ),
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          top: BorderSide(
+                            color: Color.fromARGB(68, 255, 255, 255),
+                            width: 2,
+                          ),
+                        ),
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: <Widget>[
                           Expanded(
                             child: BottomNavText(
-                              text: "at\nDay",
+                              text: "AT\nDAY",
                               value: selectedPlanet.tempDay,
                             ),
                           ),
                           Expanded(
                             child: BottomNavText(
-                              text: "at\nnight",
+                              text: "AT\nNIGHT",
                               value: selectedPlanet.tempDay,
                             ),
                           ),
@@ -135,7 +158,7 @@ class _SolarPlanetsState extends State<SolarPlanets>
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
             ],
           ),
@@ -147,42 +170,43 @@ class _SolarPlanetsState extends State<SolarPlanets>
 
 class BottomNavText extends StatelessWidget {
   final String text;
-  final String value;
+  final int value;
   const BottomNavText({Key? key, required this.text, required this.value})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         AutoSizeText(
           text,
-          style: TextStyle(
-            //                          wordSpacing: 10,
-            fontSize: MediaQuery.of(context).size.height * .03,
+          style: const TextStyle(
+            fontSize: 20,
             height: 1,
             color: Colors.grey,
             fontFamily: 'Teko',
           ),
         ),
         const SizedBox(
-          width: 20,
+          width: 5,
         ),
-        AutoSizeText(
-          value,
-          style: TextStyle(
-            //                          wordSpacing: 10,
-            fontSize: MediaQuery.of(context).size.height * .03,
-            height: 1,
-            color: Colors.grey,
+        AnimatedSlideOdometerNumber(
+          letterWidth: 18,
+          curve: Curves.easeInOut,
+          numberTextStyle: const TextStyle(
+            fontSize: 50,
+            height: .5,
             fontFamily: 'Teko',
           ),
-        ),
+          odometerNumber: OdometerNumber(value),
+          duration: const Duration(
+            seconds: 1,
+            milliseconds: 30,
+          ),
+        )
       ],
     );
   }
-}
-
-updatePlanetIndex(Planet planet) {
-  selectedPlanet = planet;
 }
