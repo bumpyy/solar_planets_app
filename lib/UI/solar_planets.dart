@@ -12,7 +12,7 @@ class SolarPlanets extends StatefulWidget {
   const SolarPlanets({Key? key}) : super(key: key);
 
   @override
-  _SolarPlanetsState createState() => _SolarPlanetsState();
+  State<SolarPlanets> createState() => _SolarPlanetsState();
 }
 
 Planet selectedPlanet = planets[0];
@@ -133,11 +133,6 @@ class _SolarPlanetsState extends State<SolarPlanets>
                                         ),
                                       );
                                     },
-                                    child: const Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: Color.fromRGBO(255, 255, 255, .5),
-                                      size: 35,
-                                    ),
                                     style: ElevatedButton.styleFrom(
                                       shape: const CircleBorder(),
                                       padding: const EdgeInsets.all(8),
@@ -148,6 +143,11 @@ class _SolarPlanetsState extends State<SolarPlanets>
                                             Color.fromRGBO(255, 255, 255, .3),
                                       ),
                                       onPrimary: Colors.red, // <-- Splash color
+                                    ),
+                                    child: const Icon(
+                                      Icons.keyboard_arrow_down,
+                                      color: Color.fromRGBO(255, 255, 255, .5),
+                                      size: 35,
                                     ),
                                   ),
                                 )

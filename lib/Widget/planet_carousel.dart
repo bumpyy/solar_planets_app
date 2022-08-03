@@ -51,19 +51,22 @@ class PlanetsCarousell extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   ParallaxContainer(
+                    position: info.position!,
+                    translationFactor: 300.0,
                     child: Lottie.asset(
                       'assets/lottie/planets.json',
                       height: 25,
                       fit: BoxFit.cover,
                     ),
-                    position: info.position!,
-                    translationFactor: 300.0,
                   ),
                   //
                   //planet name
                   ParallaxContainer(
+                    position: info.position!,
+                    translationFactor: 100.0,
                     child: Hero(
                       flightShuttleBuilder: _flightShuttleBuilder,
+                      tag: 'planetName',
                       child: Center(
                         child: AutoSizeText(
                           planets[info.index!].name,
@@ -73,10 +76,7 @@ class PlanetsCarousell extends StatelessWidget {
                                   MediaQuery.of(context).size.height * .15),
                         ),
                       ),
-                      tag: 'planetName',
                     ),
-                    position: info.position!,
-                    translationFactor: 100.0,
                   ),
                 ],
               ),
@@ -85,6 +85,8 @@ class PlanetsCarousell extends StatelessWidget {
             Positioned(
               top: MediaQuery.of(context).size.height * .3,
               child: ParallaxContainer(
+                position: info.position!,
+                translationFactor: 400.0,
                 child: AutoSizeText(
                   planets[info.index!].nick,
                   style: const TextStyle(
@@ -93,8 +95,6 @@ class PlanetsCarousell extends StatelessWidget {
                     fontFamily: 'Teko',
                   ),
                 ),
-                position: info.position!,
-                translationFactor: 400.0,
               ),
             ),
 
@@ -102,19 +102,19 @@ class PlanetsCarousell extends StatelessWidget {
             AlignPositioned(
               moveByContainerHeight: .4,
               child: ParallaxContainer(
+                position: info.position!,
+                translationFactor: 600.0,
                 child: OverflowBox(
+                  maxWidth: MediaQuery.of(context).size.width * 1.5,
                   child: Hero(
+                    tag: 'planetImage',
                     child: Image.asset(
                       planets[info.index!].image,
                       width: MediaQuery.of(context).size.height * .9,
                     ),
-                    tag: 'planetImage',
                   ),
-                  maxWidth: MediaQuery.of(context).size.width * 1.5,
 //                    alignment: Alignment(0, (heightPx >= 760.0) ? 2.3 : 3.3),
                 ),
-                position: info.position!,
-                translationFactor: 600.0,
               ),
             ),
           ],

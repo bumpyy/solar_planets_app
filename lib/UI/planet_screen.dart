@@ -13,7 +13,7 @@ class PlanetScreen extends StatefulWidget {
       : super(key: key);
 
   @override
-  _PlanetScreenState createState() => _PlanetScreenState();
+  State<PlanetScreen> createState() => _PlanetScreenState();
 }
 
 class _PlanetScreenState extends State<PlanetScreen> {
@@ -37,7 +37,7 @@ class _PlanetScreenState extends State<PlanetScreen> {
         !(_scrollController.position.pixels >
             _scrollController.position.minScrollExtent);
 
-    SchedulerBinding.instance?.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       _scrollController.animateTo(_scrollController.position.minScrollExtent,
           duration: const Duration(milliseconds: 800), curve: Curves.easeOut);
     });
@@ -64,6 +64,7 @@ class _PlanetScreenState extends State<PlanetScreen> {
                   Positioned(
                     top: 0,
                     child: Hero(
+                      tag: 'planetName',
                       child: AutoSizeText(
                         widget.planetName,
                         maxLines: 1,
@@ -71,7 +72,6 @@ class _PlanetScreenState extends State<PlanetScreen> {
                             color: const Color.fromARGB(140, 255, 255, 255),
                             fontSize: MediaQuery.of(context).size.height * .17),
                       ),
-                      tag: 'planetName',
                     ),
                   ),
                   AlignPositioned(
@@ -229,11 +229,6 @@ class _PlanetScreenState extends State<PlanetScreen> {
             tag: 'arrow',
             child: ElevatedButton(
               onPressed: _scrollToTopAndPop,
-              child: const Icon(
-                Icons.keyboard_arrow_up,
-                color: Color.fromRGBO(255, 255, 255, 0.5),
-                size: 35,
-              ),
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(8),
@@ -242,6 +237,11 @@ class _PlanetScreenState extends State<PlanetScreen> {
                   color: Color.fromRGBO(255, 255, 255, .3),
                 ),
                 onPrimary: Colors.red, // <-- Splash color
+              ),
+              child: const Icon(
+                Icons.keyboard_arrow_up,
+                color: Color.fromRGBO(255, 255, 255, 0.5),
+                size: 35,
               ),
             ),
           ),
